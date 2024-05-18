@@ -3,7 +3,7 @@
 # Ellie Schaefer - 4/30/2024
 echo "Are you ready to shut down?"
 read -p "Continue? (y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
-~/Scripts/update.sh
+~/Scripts/update
 if [ $? -eq 0 ]
 then
 	echo "Update successful, shutting down now."
