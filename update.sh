@@ -17,7 +17,7 @@ then
 	exit 1
 fi
 echo "Updating FlatPak Packages"
-sudo flatpak update
+flatpak update
 if [ $? -ne 0 ]
 then
 	echo "Flatpak update failed, stopping now." >&2
