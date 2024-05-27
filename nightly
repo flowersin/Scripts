@@ -5,6 +5,7 @@
 restart=false	# Create restart variable
 
 usage() { echo "usage: $0 [-r]"; }
+
 while getopts ":r" option; do
 	case $option in
 		r) restart=true ;;
