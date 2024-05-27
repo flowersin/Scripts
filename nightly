@@ -1,13 +1,28 @@
 #!/bin/bash
 # A script to run nightly, preforms system maintinence before shutting down.
 # Ellie Schaefer - 4/30/2024
+
+restart=false	# Create restart variable
+
+usage() { echo "usage: $0 [-r]"; }
+while getopts ":r" option; do
+	case $option in
+		r) restart=true ;;
+		\?) echo "Invalid option: -$OPTARG"; usage; exit 1;;
+	esac
+done
 echo "Are you ready to shut down?"
-read -p "Continue? (y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
-~/Scripts/update
-if [ $? -eq 0 ]
-then
-	echo "Update successful, shutting down now."
-	sudo shutdown now
+read -p "Continue? (y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1	# Confirm that user is ready to shutdow, if not, exit
+~/Scripts/update	# Run update script
+if [ $? -eq 0 ]; then	# Make sure update script finished with no errors
+	if $restart; then
+		echo "Update successful, restarting now."
+		sudo shutdown -r now
+	else
+		echo "Update successful, shutting down now."
+		sudo shutdown now
+	fi
 else
 	echo "Update failed, not shutting down."
+	exit 1
 fi
