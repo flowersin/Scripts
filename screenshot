@@ -1,3 +1,23 @@
 #!/bin/bash
-FILENAME="screenshot-`date +%F-%T`"
-grim -g "$(slurp)" ~/Images/Screenshots/$FILENAME.png
+# A screenshot script using grim and slurp
+# Ellie Schaefer - 5/27/2024
+
+filename="screenshot-`date +%F-%T`"
+here=false
+
+usage() { echo "usage $0 [-h] [-n FILENAME ]"; }
+
+while getopts ":hn:" option; do
+	case $option in
+		h) here=true;;
+		n) filename=$OPTARG;;
+		\?) echo "invalid option: -$OPTARG"; usage; exit 1;;
+	esac
+done
+if $here; then
+	grim -g "$(slurp)" ./$FILENAME.png
+	exit 0
+else
+	grim -g "$(slurp)" ~/Images/Screenshots/$FILENAME.png
+	exit 0
+fi
