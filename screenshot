@@ -15,9 +15,9 @@ while getopts ":hn:" option; do
 	esac
 done
 if $here; then
-	grim -g "$(slurp)" ./$FILENAME.png
+	grim -g "$(slurp)" ./"$filename".png
 	exit 0
 else
-	grim -g "$(slurp)" ~/Images/Screenshots/$FILENAME.png
+	grim -g "$(slurp)" ~/Images/Screenshots/"$filename".png
 	exit 0
 fi
