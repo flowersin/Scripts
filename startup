@@ -1,0 +1,9 @@
+#!/bin/bash
+# A startup script
+# By Ellie Schaefer
+# 6/9/24
+
+cd ~/Dotfiles/
+git pull
+cd ~/Scripts/
+git pull
