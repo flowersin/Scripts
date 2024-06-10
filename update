@@ -8,7 +8,7 @@ then
 	exit 1
 fi
 echo "Updating FlatPak Packages"
-flatpak update
+flatpak update -y	# Assume yes
 if [ $? -ne 0 ]
 then
 	echo "Flatpak update failed, stopping now." >&2
