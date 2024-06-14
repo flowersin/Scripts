@@ -2,7 +2,7 @@
 # A screenshot script using grim and slurp
 # Ellie Schaefer - 5/27/2024
 
-filename="screenshot-`date +%F-%T`"
+filename="screenshot-`date +%Y%m%d-%H%M%S`"
 here=false
 
 usage() { echo "usage $0 [-h] [-n FILENAME ]"; }
