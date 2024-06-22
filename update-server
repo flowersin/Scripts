@@ -1,0 +1,29 @@
+#!/bin/bash
+# A script to update my server
+# Ellie Schaefer - 6/22/24
+
+log=/var/log/server-update/log-`date -I`
+
+if [ $(whoami) != 'root' ]; then	# If not root...
+	echo "!!! Script Must be run as Root !!!" >> $log	# Log event
+	return 1
+
+wall -n "Updating and rebooting system in 10 minutes!"
+
+sleep 10m
+
+echo "--- $(date -Iseconds): Starting Update ---" >> $log	# Print Starting message update to log
+
+dnf update --assumeyes >> $log	# Run dnf update, print output to log
+
+if [ #? -ne 0 ]; then	# If update fails, then...
+	echo "!!! $(date -Iseconds): Update Failed !!!" >> $log	# Print error message to log
+	# I would like to add a feature to message me in case of failure, but I have yet to find a good way.
+	return 2
+fi
+
+echo "--- $(date -Iseconds): Update finished, rebooting! ---" >> $log
+
+shutdown -r now	# Reboot system
+
+
