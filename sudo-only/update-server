@@ -5,7 +5,6 @@
 log=/var/log/server-update/log-`date -I`
 
 if [ $(whoami) != 'root' ]; then	# If not root...
-	echo "!!! Script Must be run as Root !!!" >> $log	# Log event
 	exit 1
 fi
 
