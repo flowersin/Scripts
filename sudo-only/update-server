@@ -16,7 +16,7 @@ echo "--- $(date -Iseconds): Starting Update ---" >> $log	# Print Starting messa
 
 dnf update --assumeyes >> $log	# Run dnf update, print output to log
 
-if [ #? -ne 0 ]; then	# If update fails, then...
+if [ $? -ne 0 ]; then	# If update fails, then...
 	echo "!!! $(date -Iseconds): Update Failed !!!" >> $log	# Print error message to log
 	# I would like to add a feature to message me in case of failure, but I have yet to find a good way.
 	return 2
