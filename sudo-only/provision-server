@@ -1,0 +1,13 @@
+#!/bin/bash
+# A script to automate the process of provisioning servers
+
+read -p "Enter Hostname: " hostname
+hostnamectl hostname "$hostname"
+read -p "Enter Tailscale Auth Key: " tsAuthKey
+tailscale up --auth-key="$tsAuthKey"
+echo "Updating DNF Packages"
+dnf update
+echo "Deleting Symlink to this script"
+rm /root/provision-server
+echo "Rebooting!"
+reboot
