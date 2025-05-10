@@ -3,11 +3,14 @@
 
 read -p "Enter Hostname: " hostname
 hostnamectl hostname "$hostname"
-read -p "Enter Tailscale Auth Key: " tsAuthKey
+echo "hostname updated"
+read -p "Enter Tailscale Auth Key: \n(Found in Tailscale admin console -> Add device -> Linux Server - > Generate Install Script -> --auth-key=[copy this part])" tsAuthKey
 tailscale up --auth-key="$tsAuthKey"
+echo "Server added to tailnet"
 echo "Updating DNF Packages"
 dnf update
 echo "Deleting Symlink to this script"
 rm /root/provision-server
-echo "Rebooting!"
+echo "All done, Rebooting in 10 seconds!"
+sleep 10
 reboot
