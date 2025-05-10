@@ -1,14 +1,15 @@
 #!/bin/bash
 # A script to automate the process of provisioning servers
 
-if [ !$PROVISIONUPDATED ]; then # If provision script hasn't already been updated
-	echo "Checking if provision script is up to date."
-	cd ~/Scripts/
-	git pull
-	export PROVISIONUPDATED=True # Set enviromental variable, so we don't have to do this again
-	exec ~/Scripts/sudo-only/provision-server # Restart provision script
+echo "Checking if provision script is up to date..."
+if [ $(git pull | wc -l) -eq 1 ]; then # If repo is up to date, git pull will only be one line... Yes i know it's a bad solution, but it works
+	echo "Script up to date, continuing"
+else 
+	echo "Repo updated, restarting script"
+	exec ~/Scripts/sudo-only/provision-server # Restart the scipt, using the updated version.  Pray it doesn't get caught in a loop...
 fi
 
+echo "Beginning provision process..."
 read -p "Enter Hostname: " hostname
 hostnamectl hostname "$hostname"
 echo "hostname updated"
