@@ -1,11 +1,11 @@
 #!/bin/bash
 # A script to automate the process of provisioning servers
 
-if [ !$ProvisionScriptUpdated ]; then # If provision script hasn't already been updated
+if [ !$PROVISIONUPDATED]; then # If provision script hasn't already been updated
 	echo "Checking if provision script is up to date."
 	cd ~/Scripts/
 	git pull
-	export ProvisionScriptUpdated=True # Set enviromental variable, so we don't have to do this again
+	export PROVISIONUPDATED=True # Set enviromental variable, so we don't have to do this again
 	exec ~/Scripts/sudo-only/provision-server # Restart provision script
 fi
 
